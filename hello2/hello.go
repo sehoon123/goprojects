@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
-
 func main() {
-	fmt.Println("Hello Go World")
+	a, b := 1, 2
+	a, b = b, a
+	print(a, b)
 }
