@@ -1,7 +1,10 @@
 package main
 
+import "fmt"
+
 func main() {
-	a, b := 1, 2
-	a, b = b, a
-	print(a, b)
+	d := [3]int{}
+	d[1] = 1
+	fmt.Println(d)
+
 }
