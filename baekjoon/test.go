@@ -1,9 +1,16 @@
 package main
 
+import (
+	"fmt"
+)
+
 func main() {
-	d := make([][]int, 5)
-	for i := 0; i < 5; i++ {
-		d[i] = make([]int, 5)
-	}
+	var d [][]int
+	d = append(d, []int{6, 13})
+	d = append(d, []int{4, 8})
+	d = append(d, []int{3, 6})
+	d = append(d, []int{5, 12})
+	fmt.Println(d)
+	fmt.Println(d)
 
 }
