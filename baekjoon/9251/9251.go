@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"sort"
 )
 
 func main() {
@@ -35,9 +34,7 @@ func lcs(a, b string) int {
 		}
 	}
 
-	sort.Ints(dp[len(dp)-1])
-
-	return dp[len(dp)-1][len(b)]
+	return dp[len(a)][len(b)]
 }
 
 func max(a, b int) int {
