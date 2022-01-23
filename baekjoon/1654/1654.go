@@ -45,3 +45,31 @@ func binary_search(arr []int, alpha, target int) (maxLen int) {
 	}
 	return
 }
+
+//upperBound
+func upperBound(arr []int, target int) int {
+	start, end := 0, len(arr)
+	for start < end {
+		mid := (start + end) / 2
+		if arr[mid] < target {
+			start = mid + 1
+		} else {
+			end = mid
+		}
+	}
+	return start
+}
+
+//lowerBound
+func lowerBound(arr []int, target int) int {
+	start, end := 0, len(arr)
+	for start < end {
+		mid := (start + end) / 2
+		if arr[mid] <= target {
+			start = mid + 1
+		} else {
+			end = mid
+		}
+	}
+	return start
+}
