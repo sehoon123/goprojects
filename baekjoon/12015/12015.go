@@ -30,7 +30,7 @@ func main() {
 		}
 	}
 
-	fmt.Fprintln(w, lis)
+	fmt.Fprintln(w, len(lis))
 
 }
 
