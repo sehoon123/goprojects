@@ -39,30 +39,30 @@ func main() {
 	}
 
 	pq := PriorityQueue{}
-	visited := make([]int, V+1)
+	value := make([]int, V+1)
 	heap.Push(&pq, &edge{K, 0})
-	visited[K] = 1
+	value[K] = 1
 
 	for pq.Len() > 0 {
 		now := heap.Pop(&pq).(*edge)
 
-		if visited[now.to] < now.cost {
+		if value[now.to] < now.cost {
 			continue
 		}
 
 		for _, next := range graph[now.to] {
-			if visited[next.to] == 0 || visited[next.to] > visited[now.to]+next.cost {
-				visited[next.to] = visited[now.to] + next.cost
-				heap.Push(&pq, &edge{next.to, visited[next.to]})
+			if value[next.to] == 0 || value[next.to] > value[now.to]+next.cost {
+				value[next.to] = value[now.to] + next.cost
+				heap.Push(&pq, &edge{next.to, value[next.to]})
 			}
 		}
 	}
 
 	for i := 1; i <= V; i++ {
-		if visited[i] == 0 {
+		if value[i] == 0 {
 			wr.WriteString("INF\n")
 		} else {
-			wr.WriteString(strconv.Itoa(visited[i]-1) + "\n")
+			wr.WriteString(strconv.Itoa(value[i]-1) + "\n")
 		}
 	}
 
