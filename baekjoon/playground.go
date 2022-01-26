@@ -3,30 +3,35 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"math/big"
 	"os"
 )
 
-func main() {
-	r, w := bufio.NewReader(os.Stdin), bufio.NewWriter(os.Stdout)
-	defer w.Flush()
+var (
+	sc = bufio.NewScanner(os.Stdin)
+	wr = bufio.NewWriter(os.Stdout)
+)
 
-	var n int
-	fmt.Fscan(r, &n)
-	var a string
-	fmt.Fscan(r, &a)
+func nextInt() int {
+	sc.Scan()
+	b := sc.Bytes()
+	r, f := 0, 1
 
-	sum := big.NewInt(0)
-	aaaa := big.NewInt(1234567891)
-	for i, v := range a {
-		var s = big.NewInt(31)
-		var t = big.NewInt(int64(i))
-		alphabet := big.NewInt(int64(v - 'a' + 1))
-		exp := s.Exp(s, t, nil)
-		tmp := alphabet.Mul(alphabet, exp)
-		tmp.Mod(tmp, aaaa)
-		sum.Add(sum, tmp)
+	for _, c := range b {
+		if c == '-' {
+			f = -1
+			continue
+		}
+		r *= 10
+		r += int(c - '0')
 	}
 
-	fmt.Fprintln(w, sum.Mod(sum, aaaa))
+	return r * f
+}
+
+func main() {
+	sc.Split(bufio.ScanWords)
+	defer wr.Flush()
+
+	a, b, c := nextInt(), nextInt(), nextInt()
+	fmt.Fprintln(wr, a, b, c)
 }
