@@ -26,6 +26,6 @@ func nextInt() int {
 }
 
 func main() {
-	n := nextInt()
-	fmt.Println(n)
+	n, m := nextInt(), nextInt()
+	fmt.Println(n, m)
 }
