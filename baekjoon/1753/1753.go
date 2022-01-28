@@ -32,14 +32,14 @@ func main() {
 	V, E := nextInt(), nextInt()
 	K := nextInt()
 
-	graph := make([][]edge, V+1)
+	graph := make([][]edge, 20001)
 	for i := 0; i < E; i++ {
 		u, v, w := nextInt(), nextInt(), nextInt()
 		graph[u] = append(graph[u], edge{v, w})
 	}
 
 	pq := PriorityQueue{}
-	value := make([]int, V+1)
+	value := make([]int, 20001)
 	heap.Push(&pq, &edge{K, 0})
 	value[K] = 1
 

@@ -62,12 +62,18 @@ func main() {
 	for i := 0; i < E; i++ {
 		a, b, c := nextInt(), nextInt(), nextInt()
 		graph[a] = append(graph[a], Node{b, c})
+		graph[b] = append(graph[b], Node{a, c})
 	}
 
 	v1, v2 := nextInt(), nextInt()
 
 	result := min(dijkstra(1, v1, graph)+dijkstra(v1, v2, graph)+dijkstra(v2, N, graph), dijkstra(1, v2, graph)+dijkstra(v2, v1, graph)+dijkstra(v1, N, graph))
-	fmt.Fprintln(wr, result)
+
+	if result >= 1e9-1 {
+		fmt.Fprintln(wr, -1)
+	} else {
+		fmt.Fprintln(wr, result)
+	}
 
 }
 func min(a, b int) int {
