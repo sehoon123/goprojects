@@ -7,31 +7,32 @@ import (
 )
 
 func main() {
-	r, w := bufio.NewReader(os.Stdin), bufio.NewWriter(os.Stdout)
+	r := bufio.NewReader(os.Stdin)
+	w := bufio.NewWriter(os.Stdout)
 	defer w.Flush()
 	var n, m int
 	fmt.Fscan(r, &n, &m)
-	var line string
-	fmt.Fscan(r, &line)
-
-	count := 0
-	for i := 0; i < m; i++ {
-		k := 0
-		if line[i] == 'O' {
-			continue
-		} else {
-			for line[i+1] == 'O' && line[i+2] == 'I' {
-				k++
-				if k == n {
-					k--
-					count++
-				}
-				i += 2
-			}
-			k = 0
-		}
+	s := make([]string, m+4)
+	for i := 0; i < m+2; i++ {
+		fmt.Fscanf(r, "%c", &s[i])
 	}
+	fmt.Fprintln(w, s)
 
-	fmt.Fprintln(w, count)
-
+	//	count := 0
+	//	ans := 0
+	//	for i := 2; i < m+4; {
+	//		if s[i-2] == 'I' && s[i-1] == 'O' && s[i] == 'I' {
+	//			count++
+	//			i += 2
+	//			if count == n {
+	//				ans++
+	//				count--
+	//			}
+	//		} else {
+	//			count = 0
+	//			i++
+	//		}
+	//	}
+	//
+	//	fmt.Fprintln(w, ans)
 }
