@@ -12,7 +12,7 @@ func main() {
 	defer w.Flush()
 	var n, m int
 	fmt.Fscan(r, &n, &m)
-	s := make([]string, m+4)
+	s := make([]byte, m+4)
 	for i := 0; i < m+2; i++ {
 		fmt.Fscanf(r, "%c", &s[i])
 	}

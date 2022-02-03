@@ -34,5 +34,32 @@ func main() {
 		sc.Scan()
 		graph[i] = sc.Text()
 	}
-	fmt.Fprintln(wr, c, graph)
+
+	dx := []int{-1, 0, 1, 0}
+	dy := []int{0, 1, 0, -1}
+
+	count := 0
+	for i := 0; i < r; i++ {
+		for j := 0; j < c; j++ {
+			if graph[i][j] == '.' {
+				for k := 0; k < 4; k++ {
+					nx, ny := i+dx[k], j+dy[k]
+					if nx < 0 || nx >= r || ny < 0 || ny >= c {
+						count++
+						continue
+					}
+					if graph[nx][ny] == 'X' {
+						count++
+					}
+				}
+				if count >= 3 {
+					fmt.Fprintln(wr, 1)
+					return
+				}
+				count = 0
+			}
+		}
+	}
+
+	fmt.Fprintln(wr, 0)
 }
