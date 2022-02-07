@@ -1,20 +1,24 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
+	"sync"
 )
 
 func main() {
-	r, w := bufio.NewReader(os.Stdin), bufio.NewWriter(os.Stdout)
-	defer w.Flush()
+	slice := []string{"a", "b", "c", "d", "e"}
+	var wg sync.WaitGroup
+	wg.Add(len(slice))
 
-	graph := make([]string, 3)
-	for i := 0; i < 3; i++ {
-		fmt.Fscan(r, &graph[i])
+	fmt.Println("running")
+
+	for i := 0; i < len(slice); i++ {
+		go func(i int) {
+			defer wg.Done()
+			fmt.Println(slice[i])
+		}(i)
 	}
 
-	fmt.Fprintln(w, graph[1][1] == '1')
+	wg.Wait()
 
 }
