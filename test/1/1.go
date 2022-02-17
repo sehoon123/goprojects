@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 )
 
@@ -29,11 +30,5 @@ func main() {
 	defer wr.Flush()
 
 	n, m := nextInt(), nextInt()
-	a := make([][]int, n)
-	for i := range a {
-		a[i] = make([]int, m)
-	}
-
-	for i := 0; i < n; i++ {
-	}
+	fmt.Println(n, m)
 }
