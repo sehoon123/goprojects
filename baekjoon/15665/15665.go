@@ -37,11 +37,11 @@ func main() {
 	temp = make([]int, M)
 	visited = make([]bool, N)
 
-	dfs(0, 0)
+	dfs(0)
 
 }
 
-func dfs(idx, cnt int) {
+func dfs(idx int) {
 	if idx == M {
 		for i := 0; i < M; i++ {
 			fmt.Fprintf(wr, "%d ", temp[i])
@@ -51,13 +51,11 @@ func dfs(idx, cnt int) {
 	}
 
 	before := -1
-	for i := cnt; i < N; i++ {
-		if !visited[i] && arr[i] != before {
-			visited[i] = true
+	for i := 0; i < N; i++ {
+		if before != arr[i] {
 			temp[idx] = arr[i]
 			before = arr[i]
-			dfs(idx+1, cnt+1)
-			visited[i] = false
+			dfs(idx + 1)
 		}
 	}
 }
