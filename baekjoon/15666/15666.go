@@ -52,12 +52,10 @@ func dfs(idx, cnt int) {
 
 	before := -1
 	for i := cnt; i < N; i++ {
-		if !visited[i] && arr[i] != before {
-			visited[i] = true
+		if before != arr[i] {
 			temp[idx] = arr[i]
 			before = arr[i]
-			dfs(idx+1, cnt+1)
-			visited[i] = false
+			dfs(idx+1, i)
 		}
 	}
 }
