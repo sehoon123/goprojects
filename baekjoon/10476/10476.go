@@ -22,9 +22,9 @@ func main() {
 	sc.Split(bufio.ScanWords)
 	defer wr.Flush()
 
-	n, k := nextInt(), nextInt()
-	graph := make([][]int, 202)
+	graph := make([][]int, 201)
 	dp := make([][][]int, 202)
+	n, k := nextInt(), nextInt()
 
 	for i := 1; i <= n+1; i++ {
 		graph[i] = make([]int, 2)
@@ -33,11 +33,13 @@ func main() {
 		graph[i][1] = b
 
 		dp[i] = make([][]int, 202)
-		for j := 0; j < n+1; j++ {
+		for j := 0; j < 201; j++ {
 			dp[i][j] = make([]int, 3)
 		}
 	}
 
+	//dp[floor][closed][now_state]
+	// now_state: 0: none, 1: left, 2: right
 	dp[1][0][0] = graph[1][0] + graph[1][1]
 	dp[1][1][1] = graph[1][1]
 	dp[1][1][2] = graph[1][0]
