@@ -2,10 +2,9 @@ package main
 
 import (
 	"bufio"
-	"container/heap"
 	"fmt"
 	"os"
-	"strconv"
+	"sort"
 )
 
 var (
@@ -15,33 +14,33 @@ var (
 
 func nextInt() int {
 	sc.Scan()
-	i, _ := strconv.Atoi(sc.Text())
-	return i
-}
-
-type PQ []int
-
-func (pq PQ) Len() int           { return len(pq) }
-func (pq PQ) Swap(i, j int)      { pq[i], pq[j] = pq[j], pq[i] }
-func (pq PQ) Less(i, j int) bool { return pq[i] < pq[j] }
-func (pq *PQ) Push(x interface{}) {
-	*pq = append(*pq, x.(int))
-}
-func (pq *PQ) Pop() interface{} {
-	old := *pq
-	n := len(old)
-	x := old[n-1]
-	*pq = old[0 : n-1]
-	return x
+	r, f := 0, 1
+	for _, c := range sc.Bytes() {
+		if c == '-' {
+			f = -1
+			continue
+		}
+		r *= 10
+		r += int(c - '0')
+	}
+	return r * f
 }
 
 func main() {
 	sc.Split(bufio.ScanWords)
 	defer wr.Flush()
-	n := nextInt()
-	pq := make(PQ, n)
-	for i := 0; i < n; i++ {
-		heap.Push(&pq, nextInt())
+	N := nextInt()
+	arr := make([]int, 0, N)
+	for i := 0; i < N; i++ {
+		arr = Insert(arr, nextInt())
+		fmt.Fprintln(wr, arr[i/2])
 	}
-	fmt.Fprintln(wr, pq)
+}
+
+func Insert(arr []int, x int) []int {
+	i := sort.Search(len(arr), func(i int) bool { return arr[i] > x })
+	arr = append(arr, 0)
+	copy(arr[i+1:], arr[i:])
+	arr[i] = x
+	return arr
 }
