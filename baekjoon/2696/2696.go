@@ -29,16 +29,25 @@ func nextInt() int {
 func main() {
 	sc.Split(bufio.ScanWords)
 	defer wr.Flush()
-	N := nextInt()
-	arr := make([]int, 0, N)
-	for i := 0; i < N; i++ {
-		arr = Insert(arr, nextInt())
-		fmt.Fprintln(wr, arr[i/2])
+	T := nextInt()
+	for i := 0; i < T; i++ {
+		M := nextInt()
+		fmt.Fprintln(wr, (M+1)/2)
+		arr := make([]int, 0, M)
+		for j := 0; j < M; j++ {
+			arr = Insert(arr, nextInt())
+			if j%2 == 0 {
+				fmt.Fprintf(wr, "%d ", arr[j/2])
+			}
+		}
+		fmt.Fprintln(wr)
 	}
 }
 
 func Insert(arr []int, x int) []int {
-	i := sort.Search(len(arr), func(i int) bool { return arr[i] > x })
+	i := sort.Search(len(arr), func(i int) bool {
+		return arr[i] > x
+	})
 	arr = append(arr, 0)
 	copy(arr[i+1:], arr[i:])
 	arr[i] = x
