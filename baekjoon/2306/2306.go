@@ -41,18 +41,19 @@ func max(a, b int) int {
 	return b
 }
 
-//
-//  PYTHON CODE
-//
-//buff = input()
-//
-//memo = [[0 for i in range(501)] for j in range(501)]
-//
-//for j in range(1,len(buff)):
-//for i in range(j-1,-1,-1):
-//if buff[i]+buff[j] in ('at','gc'):
-//memo[i][j] = memo[i+1][j-1]+2
-//for t in range(i+1,j):
-//memo[i][j] = max(memo[i][j],memo[i][t]+memo[t][j])
-//
-//print( memo[0][len(buff)-1] )
+/*
+PYTHON CODE
+
+buff = input()
+
+memo = [[0 for i in range(501)] for j in range(501)]
+
+for j in range(1,len(buff)):
+	for i in range(j-1,-1,-1):
+		if buff[i]+buff[j] in ('at','gc'):
+			memo[i][j] = memo[i+1][j-1]+2
+		for t in range(i+1,j):
+			memo[i][j] = max(memo[i][j],memo[i][t]+memo[t][j])
+
+print( memo[0][len(buff)-1] )
+*/
