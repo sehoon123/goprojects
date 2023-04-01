@@ -59,6 +59,10 @@ func main() {
 						dp[i][j] = cost
 					}
 				}
+
+				for i := range dp {
+					fmt.Fprintln(wr, dp[i])
+				}
 			}
 		}
 
