@@ -5,41 +5,57 @@ import (
 	"fmt"
 	"os"
 	"sort"
+	"strconv"
 )
 
-func main() {
-	r, w := bufio.NewReader(os.Stdin), bufio.NewWriter(os.Stdout)
-	defer w.Flush()
+var (
+	sc = bufio.NewScanner(os.Stdin)
+	wr = bufio.NewWriter(os.Stdout)
+)
 
-	var n, c int
-	fmt.Fscan(r, &n, &c)
+func nextInt() int {
+	sc.Scan()
+	i, _ := strconv.Atoi(sc.Text())
+	return i
+}
+
+func main() {
+	sc.Split(bufio.ScanWords)
+	defer wr.Flush()
+
+	n, c := nextInt(), nextInt()
+	maxLen := 1<<31 - 1
 
 	houses := make([]int, n)
 	for i := range houses {
-		fmt.Fscan(r, &houses[i])
+		houses[i] = nextInt()
 	}
-
-	wifi := make([]int, 0, c)
 
 	sort.Ints(houses)
-	start, end := 1, houses[n-1]
 
-	for start < end {
-		wifi = make([]int, 0, c)
-		wifi = append(wifi, houses[0])
-		mid := (start + end) / 2
-		for _, v := range houses {
-			if v-wifi[len(wifi)-1] >= mid {
-				wifi = append(wifi, v)
+	l, r := 1, maxLen
+
+	check := func(houses []int, mid, c int) bool {
+		cnt := 1
+		prev := houses[0]
+		for i := 1; i < len(houses); i++ {
+			if houses[i]-prev >= mid {
+				cnt++
+				prev = houses[i]
 			}
 		}
-		if len(wifi) >= c {
-			start = mid + 1
-		} else {
-			end = mid
-		}
-
+		return cnt >= c
 	}
-	fmt.Fprintln(w, end-1)
 
+	for l <= r {
+		mid := (l + r) / 2
+
+		if check(houses, mid, c) {
+			l = mid + 1
+		} else {
+			r = mid - 1
+		}
+	}
+
+	fmt.Fprintln(wr, r)
 }
